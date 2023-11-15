@@ -9,6 +9,7 @@
     "test:unit": "vitest"
   },
   "dependencies": {
+    "@mdi/font": "^7.3.67",
     "axios": "^1.6.1",
     "vue": "^3.3.4",
     "vue-axios": "^3.5.2",

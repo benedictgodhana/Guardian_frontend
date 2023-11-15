@@ -46,9 +46,10 @@
   }
 
   .animated-header {
-    font-size: 36px;
+    font-size: 60px;
     color: #007bff; /* Change color as needed */
     animation: fadeInUp 0.5s ease-in-out;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   .social-icons {
@@ -167,8 +168,7 @@
         items: [
           { src: 'Bus2-removebg.png' },
           { src: 'Bus-PhotoRoom.png-PhotoRoom.png' },
-          { src: '' },
-          { src: '' },
+         
         ],
         redirect: false,
         redirectDestination: '/', // Change this to the desired route
