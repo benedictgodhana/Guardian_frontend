@@ -1,30 +1,33 @@
 <template>
-  <v-sheet class="custom-container" elevation="7">
+  <v-sheet class="custom-container" elevation="0">
     <v-toolbar :elevation="0" class="custom-toolbar" style="background-color: rgba(255, 255, 255, 0.5); border-radius: 10px 0  0;" transition="fade">     
-       <v-img src="" alt="Logo" contain></v-img>
+      <v-img src="" alt="Logo" contain></v-img>
       <v-slide-x-transition>
         <v-row>
           <v-col class="text-h4">
             <transition name="fade" mode="out-in">
               <div style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-            font-weight: bolder; margin-left:0px; font-size: 39px; color: black; 
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            animation: fadeInOut 3s infinite alternate;">GUARDIAN ANGEL DEPARTURES</div>
+                font-weight: bolder; margin-left:10px; font-size: 45px; color: black; margin-top: 50px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                animation: fadeInOut 3s infinite alternate;">
+                GUARDIAN ANGEL DEPARTURES -
+                
+                {{ currentDate }}
+              </div>
             </transition>
           </v-col>
         </v-row>
       </v-slide-x-transition>
     </v-toolbar>
-
     <v-table :headers="headers" :items="busData" class="elevation-0 custom-table">
       <template v-slot:top>
         <v-toolbar flat class="custom-toolbar">
          <tr>
           <th style="font-size: 36px;font-family: sans-serif; font-weight: bolder;padding-left: 10px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"><v-icon>mdi-bus</v-icon>Bus Reg No</th>
           <th style="font-size: 36px;font-family: sans-serif; font-weight: bolder;padding-left: 100px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-map-marker</v-icon>Destination</th>
-          <th style="font-size: 36px;font-family: sans-serif; font-weight: bolder;padding-left: 100px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-bus</v-icon>Bus Letter</th>
-          <th  style="font-size: 36px;font-family: sans-serif; font-weight: bolder;padding-left: 110px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-clock-time-four</v-icon>Departure Time</th>
-          <th  style="font-size: 36px;font-family: sans-serif; font-weight: bolder; padding-left: 160px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-check-circle</v-icon>Status</th>
+          <th style="font-size: 36px;font-family: sans-serif; font-weight: bolder;padding-left: 160px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-bus</v-icon>Bus Letter</th>
+          <th  style="font-size: 36px;font-family: sans-serif; font-weight: bolder;padding-left: 160px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-clock-time-four</v-icon>Departure Time</th>
+          <th  style="font-size: 36px;font-family: sans-serif; font-weight: bolder; padding-left: 130px;color:aliceblue;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"><v-icon>mdi-check-circle</v-icon>Status</th>
 
          </tr>
         </v-toolbar>
@@ -64,13 +67,14 @@
 .custom-container {
   background: linear-gradient(to bottom, rgba(0, 123, 255, 0.8), rgba(255, 255, 255, 0.2)), url('/Bus2-removebg.png') center center;  background-size: cover;
   padding: 20px;
+  background-size: cover;
   margin: 0;
   max-width: 100%;
   height: 100vh;
-  width:2220px;
+  width:2050px;
   border: none;
-  margin-left: -380px;
-  margin-top: 30px;
+  margin-left: -77px;
+  margin-top: -40px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Add box-shadow for the table */
   
 }
@@ -93,6 +97,7 @@
 
 .custom-toolbar {
   background-color:#007bff;
+  height: 100px;
 }
 
 .custom-header {
@@ -112,7 +117,7 @@
   font-size: 20px;
   text-transform: uppercase;
   font-weight: 900;
-  margin-left:0px;
+  margin-left:-10px;
   font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
@@ -158,6 +163,7 @@ export default {
   },
   data() {
     return {
+      currentDate: this.getCurrentDate(),
       batchIndex: 0,
       batchSize: 8,
       words: ["WELCOME", "TO", "THE", "GUARDIAN", "ANGEL", "BUS", "STATION", "DEPARTURES!", ""],
@@ -174,6 +180,12 @@ export default {
     };
   },
   methods: {
+
+    getCurrentDate() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      return now.toLocaleDateString('en-US', options);
+    },
 
 
     formatDepartureTime(departureTime) {
@@ -217,11 +229,11 @@ export default {
     setTimeout(() => {
       // Use programmatic navigation to redirect to another page
       this.$router.push(this.redirectDestination);
-    }, 15000);
+    }, 60000);
       // Set a timer to update the batch index every 5 seconds
-  setInterval(() => {
+    setInterval(() => {
     this.batchIndex = (this.batchIndex + 1) % Math.ceil(this.busData.length / this.batchSize);
-  }, 3000);
+  }, 8000);
 },
 computed: {
   getDisplayedBusData() {
