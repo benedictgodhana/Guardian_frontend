@@ -34,7 +34,8 @@
           <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 30px;">{{ bus.bus_reg_no }}</td>
           <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 200px;">{{ bus.destination }}</td>
           <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 190px;height: 100px;">{{ bus.bus_no }}</td>
-          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 210px;">{{ bus.departure_time }}</td>
+          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 210px;">  {{ formatDepartureTime(bus.departure_time) }}
+</td>
           <td style="font-size: 35px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder; padding-left: 120px;">
   <v-btn :color="getStatusColor(bus.status)" elevation="23" style="width:200px;height:50px;font-size: 24px;border-radius: 10px;font-weight: bolder;">
     {{ bus.status }}
@@ -173,6 +174,15 @@ export default {
     };
   },
   methods: {
+
+
+    formatDepartureTime(departureTime) {
+      // Assuming departureTime is in HH:mm format
+      const [hours, minutes] = departureTime.split(':');
+      const formattedTime = `${parseInt(hours, 10) % 12 || 12}:${minutes} ${parseInt(hours, 10) < 12 ? 'AM' : 'PM'}`;
+      return formattedTime;
+    },
+    
     getStatusColor(status) {
       // Return a color based on the status value
       switch (status) {
