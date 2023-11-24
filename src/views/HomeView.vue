@@ -34,13 +34,11 @@
       </template>
       <tbody style="padding-left: 20px;">
         <tr v-for="(bus, index) in getDisplayedBusData" :key="index" class="batch-row">
-          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 30px;">{{ bus.bus_reg_no }}</td>
-          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 200px;">{{ bus.destination }}</td>
-          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 190px;height: 100px;">{{ bus.bus_no }}</td>
-          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 210px;">  {{ formatDepartureTime(bus.departure_time) }}
-</td>
+          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 30px;">{{ bus.route_name}}</td>
+          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 200px;">{{ bus.bus_number }}</td>
+          <td style="font-size: 35px;font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder;padding-left: 190px;height: 100px;">{{ bus.departure_time}}</td>
           <td style="font-size: 35px; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: bolder; padding-left: 120px;">
-  <v-btn :color="getStatusColor(bus.status)" elevation="23" style="width:200px;height:50px;font-size: 24px;border-radius: 10px;font-weight: bolder;">
+  <v-btn :color="getStatusColor(bus.status_name)" elevation="23" style="width:200px;height:50px;font-size: 24px;border-radius: 10px;font-weight: bolder;">
     {{ bus.status }}
   </v-btn>
 </td>        </tr>
@@ -73,7 +71,7 @@
   height: 100vh;
   width:2050px;
   border: none;
-  margin-left: -77px;
+  margin-left:100px;
   margin-top: -40px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1); /* Add box-shadow for the table */
   
@@ -168,11 +166,11 @@ export default {
       batchSize: 8,
       words: ["WELCOME", "TO", "THE", "GUARDIAN", "ANGEL", "BUS", "STATION", "DEPARTURES!", ""],
       headers: [
-      { text: 'Bus Letter', value: 'bus_no' },
-        { text: 'Bus Reg No', value: 'busRegNo' },
-        { text: 'Destination', value: 'destination' },
+      { text: 'Bus Reg No', value: 'reg_number' },
+        { text: 'Destination', value: 'route_name' },
+        { text: 'Bus Letter', value: 'bus_number' },
         { text: 'Departure Time', value: 'departureTime' },
-        { text: 'Status', value: 'status' },
+        { text: 'Status', value: 'status_name' },
       ],
       busData: [],
       redirect: false,
@@ -197,19 +195,19 @@ export default {
     
     getStatusColor(status) {
       // Return a color based on the status value
-      switch (status) {
-        case 'Scheduled':
+      switch (status_name) {
+        case 'On Time':
           return 'green';
-          case 'pending':
-          return 'purple';
+          case 'Loading':
+          return 'Orange';
         case 'Delayed':
           return 'blue';
           case 'Late':
           return 'blue';
         case 'Cancelled':
           return 'red';
-          case 'confirmed':
-          return 'orange';
+          case 'Arrived':
+          return 'Grey';
         default:
           return 'green'; // Default color for unknown status
       }
